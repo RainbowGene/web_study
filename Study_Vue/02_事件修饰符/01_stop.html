@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>.stop事件修饰符</title>
+    <script src="../public/js/vue.min.js"></script>
+
+    <style>
+        .inner {
+            height: 150px;
+            background-color: gold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="inner" @click='divHandler'>
+            <!-- <input type="button" value="点击" @click='btnHandler'> 
+                当我们点击按钮时，先触发子按钮事件，再触发父容器事件，
+                
+                假如我们需要先触发父容器的事件，再触发子按钮，则修改：
+                <div class="inner" @click.capture='divHandler'>
+                
+                我们需要阻止冒泡（只触发子按钮事件），如下 -->
+            <input type="button" value="点击" @click.stop='btnHandler'>
+            <!--或者在父容器中： @click.self='onclick' 
+                。.seft:只有点击元素才会触发，也能实现冒泡
+            -->
+        </div>
+        <br>
+        <!--
+        <a href="http://www.baidu.com" @click='linkHandler'>有问题，找度娘</a>
+            会跳转链接，使用 .prevent 可以阻止默认行为（链接跳转）
+        -->
+        <a href="http://www.baidu.com" @click.prevent.once='linkHandler'>有问题，找度娘</a>
+        <!-- .once:只触发一次事件处理函数，再次点击a标签会执行跳转-->
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            methods: {
+                divHandler() {
+                    alert('父容器点击事件！')
+                },
+                btnHandler() {
+                    alert('子按钮点击事件！')
+                },
+                linkHandler() {
+                    alert('触发了链接点击事件！')
+                    console.log('触发了链接点击事件e')
+                }
+            }
+        })
+    </script>
+</body>
+<!--
+    self只会阻止自身的冒泡发生而不会阻止其他冒泡,stop可以从自身开始就阻止冒泡
+-->
+
+</html>

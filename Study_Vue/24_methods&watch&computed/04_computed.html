@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!--在引入Vue文件之后引入router文件-->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model='firstname'>+
+        <input type="text" v-model='lastname'>=
+        <input type="text" v-model='result'>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                firstname: '',
+                lastname: ''
+            },
+            methods: {},
+            computed: { //在comput中可以定义一些属性，这些属性叫做计算属性
+                'result': function () {
+                    return this.firstname + ' ' + this.lastname
+                }
+            }
+        })
+
+        /*计算属性的本质就是一个方法，但使用起来当做属性，并不是当成方法调用
+            1,直接当成普通属性使用，不要加()
+            2，这个function内部，所用到的任何data中的数据发生了变化，
+               就会立即重新计算这个 计算属性 的值，否则不会计算
+            3，计算属性的求值结果，会被缓存起来，方便下次直接使用
+        */
+
+        /*
+        三者区别：
+            computed	属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。主要当作属性来使用
+            methods	    方法表示一个具体的操作，主要书写业务逻辑
+            watch	    一个对象，键是需要观察的表达式，值是对应回调函数。主要用来监听某些特定数据的变化，
+                        从而进行某些具体的业务逻辑操作；可以看作是computed和methods的结合体
+
+        */
+    </script>
+</body>
+
+</html>

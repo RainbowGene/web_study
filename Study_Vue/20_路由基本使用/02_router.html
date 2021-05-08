@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!--在引入Vue文件之后引入router文件-->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+    <style>
+        /*
+        第一种实现样式：
+            当对应的标签被选中的时候会动态给标签添加 class属性:
+            router-link-active,那么我们就可以利用这 属性了
+        */
+        /* .router-link-active {
+            background-color: #22f7d3;
+            font-size: 20px;
+        } */
+
+        /* 第二种:
+            在VueRouter实例中有个属性叫 linkActiveClass 可以设置我们 特定的 class 值。
+        */
+        .myclass {
+            background-color: #22f7d3;
+            font-size: 20px;
+        }
+
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(140px);
+        }
+
+        /*
+            动画效果
+        */
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <a href="#/login">登录</a>
+        <a href="#/register">注册</a> -->
+
+        <!--router-link默认渲染一个a标签
+             可以通过 router-link中的 tag属性来修改 渲染的标签类型
+    -->
+        <router-link to="/login" tag='span'>登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <transition mode='out-in'>
+            <router-view></router-view>
+        </transition>
+    </div>
+    <script>
+        //创建两个组件 模板对象
+        let login = {
+            template: '<h3>login组件</h3>'
+        }
+        let register = {
+            template: '<h3>register组件</h3>'
+        }
+
+        //当导入vue-router包之后，在window全局对象中，就有了一个路由的构造函数叫VueRouter
+        //在new（实例化）路由对象时，可以为构造函数传递一个配置对象，在配置对象中可以创建路由规则
+        let routes = new VueRouter({
+            //配置规则
+            routes: [
+                { path: '/', redirect: '/login' },  //重定向：页面第一次打开没有路由规则，这是自行配置的路由（默认）
+                { path: '/login', component: login },
+                { path: '/register', component: register }
+            ],
+            linkActiveClass: 'myclass'
+        })
+
+        let vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            //将路由规则对象注册到vm实例，用来监听URL地址的变化
+            //然后显示对应的组件
+            router: routes
+        })
+    </script>
+</body>
+
+</html>

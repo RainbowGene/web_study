@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../public/js/vue.min.js"></script>
+    <!--v-bind指令，该指令可以获取vue对象中的数据，但是这个指令只能实现 M 到V的数据传递，反过来实现不了
+        v-model 指令 可以实现双向同步
+    -->
+</head>
+
+<body>
+    <div id="app">
+        修改用户名： <input type="text" name="" v-model='msg' style="width: 200px">
+    </div>
+<!-- 浏览器中 Console : vm.msg 可以看到数值的改变 -->
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'Gene'
+            }
+        })
+    </script>
+</body>
+
+</html>

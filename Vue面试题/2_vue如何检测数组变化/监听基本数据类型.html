@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>监听基本数据类型</title>
+</head>
+
+<body>
+  <div id="name"></div>
+</body>
+<script>
+  const model = {
+    name: 'vue'
+  }
+  function observe(obj) {
+    let val = obj.name;
+    Object.defineProperty(obj, 'name', {
+      get() {
+        return val
+      },
+      set(newVal) {
+        // 当有新值设置时，执行setter
+        console.log(`name变化:${val} => ${newVal}`);
+        // 解析到页面
+        compile(newVal);
+        val = newVal;
+      }
+    })
+  }
+
+  // 解析器,将变化的数据响应到页面上
+  function compile(val) {
+    document.querySelector('#name').value = val;
+  }
+
+  // 调用监听器,对model开始监听
+  observe(model);
+</script>
+
+</html>
+
+<!-- 测试： model.name='abc' 输出 name变化:${val} => ${newVal}
+      但 : model.name.key1=1 此时没有被监听到
+-->

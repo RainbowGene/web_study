@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>子组件传值给父</title>
+    <script src="../public/js/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h3>我是父组件:{{msg}}</h3>
+        <com1 @func='show'></com1>
+    </div>
+
+    <template id="temp1">
+        <div>
+            <h3>我是子组件</h3>
+            <input type="button" value="调用父组件的方法" @click='myclick'>
+        </div>
+    </template>
+
+    <script>
+        let com1 = {
+            template: '#temp1',
+            data() {
+                return { sonmsg: { name: '正新鸡排', age: 18 } }
+            },
+            methods: {
+                myclick() {
+                    this.$emit('func', this.sonmsg)
+                }
+            }
+        }
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: null
+            },
+            methods: {
+                show(data) {
+                    this.msg = data //将获取的参数赋值给Vue实例中的data.msg
+                }
+            },
+            components: {
+                com1
+            }
+        })
+    </script>
+</body>
+
+</html>

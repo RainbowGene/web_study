@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>半场动画</title>
+    <script src="../public/js/vue.min.js"></script>
+    <style>
+        /*------ball动画样式-----*/
+        .ball {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!--动画开关-->
+        <input type="button" value="开关" @click='flag=!flag'>
+        <!--添加一个圆球图标，来控制该ball的半场动画
+            javascript 钩子设定    
+        -->
+        <transition @before-enter='beforeEnter' @enter='enter' @after-enter='afterEnter'>
+            <div class="ball" v-show='flag'></div>
+        </transition>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false
+            },
+            methods: {
+                //添加钩子方法
+                beforeEnter(el) {
+                    //初始状态设置位置
+                    el.style.transform = 'translate(0,0)'
+                },
+                enter(el, done) {
+                    //添加 offsetWidth 属性
+                    el.offsetWidth
+                    //入场后的位置
+                    el.style.transform = 'translate(150px,450px)'
+                    //添加动画效果
+                    el.style.transform = 'all is ease'
+
+                    //执行 done 方法
+                    done()
+                },
+                afterEnter(el) {
+                    //改变状态
+                    this.flag = !this.flag
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

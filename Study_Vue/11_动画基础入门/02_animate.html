@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Animate实现动画</title>
+    <link href="../public/css/animate.css" rel="stylesheet">
+    <script src="../public/js/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="开关" @click="flag=!flag">
+        <transition enter-active-class="bounceIn" leave-active-class="bounceOut" :duration="{ enter: 200, leave: 400 }">
+            <h3 v-if="flag" class="animated">这是一个H3</h3>
+        </transition>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                flag: false
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

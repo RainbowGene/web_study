@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!--在引入Vue文件之后引入router文件-->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+        <!--路由传参的第二种方式：
+            数据存储在了 $route.params 对象中，那么我们获取传递数据的方式为如下:
+        -->
+        <router-link to="/login/2/list" tag='span'>登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <router-view></router-view>
+    </div>
+
+    <script>
+        // 创建两个子组件 模板对象
+        var login = {
+            template: "<h3>登录模块 {{$route.params.id}} -- {{$route.params.name}}</h3>"
+        }
+
+        var register = {
+            template: "<h3>注册模块</h3>"
+        }
+
+        // 创建一个路由对象， 当 导入 vue-router 包之后，在 window 全局对象中，
+        // 就有了一个 路由的构造函数叫做 VueRouter
+        var routerObj = new VueRouter({
+            // 配置路由规则
+            routes: [
+                { path: "/", redirect: "/login/:id/:name" },    //路由规则中特殊设置下对应关系
+                { path: "/login/:id/:name", component: login },
+                { path: "/register", component: register }
+            ]
+        })
+        var vm = new Vue({
+            el: "#app",
+            data: {},
+            methods: {},
+            // 将路由规则对象，注册到 vm 实例上，用来监听 URL 地址的变化，
+            // 然后展示对应的组件
+            router: routerObj
+        })
+    </script>
+</body>
+
+</html>

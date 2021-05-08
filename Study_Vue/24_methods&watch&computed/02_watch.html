@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!--在引入Vue文件之后引入router文件-->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model='firstname'>+
+        <input type="text" v-model='lastname'>=
+        <input type="text" v-model='result'>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                firstname: '',
+                lastname: '',
+                result: ''
+            },
+            methods: {
+            },
+            watch: {    //watch会监视data中指定的数据，当数据发生改变会触发相应的function来处理相关业务
+                'firstname': function (to, from) {
+                    this.result = this.firstname + '-' + this.lastname
+                },
+                'lastname': function (tp, from) {
+                    this.result = this.firstname + '-' + this.lastname
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

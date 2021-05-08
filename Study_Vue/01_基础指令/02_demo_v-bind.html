@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-bind</title>
+    <script src="../public/js/vue.min.js"></script>
+    <!--v-bind是Vue中提供用于绑定属性的指令，可简写为“ : ”,属性中的内容为js表达式-->
+</head>
+<style>
+    .active {
+        color: red;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <!-- <input type="button" value="提交1" title="提交按钮">
+        <input type="button" value="提交2" v-bind:title="title">
+        <input type="button" value="提交2" :title='title'>
+        <input type="button" value="提交2" :title='title + "ddd"'> -->
+
+        <h2 :class="active">{{title}}</h2>
+        <h2 :class="{'active':isActive,'line':isLine}">{{title}}</h2>
+        <button>改变样式</button>
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            title: '你好啊',
+            isActive: true,
+            isLine: true
+        }
+    })
+</script>
+
+</html>

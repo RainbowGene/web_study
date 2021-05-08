@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动画基础入门</title>
+    <script src="../public/js/vue.min.js"></script>
+    <style>
+        /*2，定义对应的样式*/
+        /**opacity 透明度  transform ：https://www.cnblogs.com/xiaomifeng/p/9139632.html**/
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(150px)
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 1s ease
+        }
+    </style>
+</head>
+
+<body>
+    <!--过渡类名实现动画
+        Vue在更新、插入或移除DOM时，我们可以在CSS过渡动画中应用class
+    -->
+    <div id="app">
+        <input type="button" value="开关" @click='flag=!flag'>
+        <!--1,需要过渡动画的元素一定要用transition标签包裹-->
+        <transition>
+            <h3 v-if='flag'>这是一个h3</h3>
+        </transition>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

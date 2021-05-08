@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-if/v-show</title>
+    <script src="../public/js/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2 v-if='flag'>v-if的使用</h2>
+        <h2 v-show='flag'>v-show的使用</h2>
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            flag: true
+        },
+        methods: {
+
+        }
+    })
+</script>
+<!--通过演示效果，v-if和v-show都能实现元素的显示和隐藏
+    区别：  v-if：1,每次都会重新删除和创建元素
+                 2,有较高的切换性能消耗
+                 3,如果元素涉及到频繁的切换，推荐使用v-show而不是v-if
+            v-show: 1,每次切换样式 display：none（而不是删除创建元素）
+                    2,有较高的初始渲染消耗
+                    3，如果元素永远也不会显示出来被用户看到，则推荐使用v-if
+-->
+
+</html>

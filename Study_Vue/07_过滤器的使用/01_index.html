@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>过滤器</title>
+    <script src="../public/js/vue.min.js"></script>
+</head>
+
+<body>
+    <!--
+      概念：  
+        Vue.js 允许你自定义过滤器，可被用作一些常见的文本格式化。过滤器可以用在两个地方：
+        mustache 插值和 v-bind 表达式。过滤器应该被添加在 JavaScript 表达式的尾部，
+        由“管道”符指示(" | ")；
+      分类：
+        过滤器分为全局过滤器和局部过滤器
+      语法：
+        Vue.filter('过滤器名称'，'回调函数')
+    -->
+
+    <div id="app">
+        <p>{{msg}}</p>
+        <p>{{msg | msgformat}}</p>
+    </div>
+
+    <script>
+        //创建一个过滤器将 NBA 替换为 美国篮球联赛
+        Vue.filter('msgformat', function (msg) {    //msg为原字段
+            return msg.replace(/NBA/g, '美国篮球联盟')  //正则表达式
+        })
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "今日NBA,保罗换威少,哈哈...NBA新闻真多，大家一起关注NBA..."
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

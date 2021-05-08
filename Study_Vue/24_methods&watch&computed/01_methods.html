@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!--在引入Vue文件之后引入router文件-->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model='firstname' @keyup='getfullname'>+
+        <input type="text" v-model='lastname' @keyup='getfullname'>=
+        <input type="text" v-model='result'>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                firstname: '',
+                lastname: '',
+                result: ''
+            },
+            methods: {  //使用methods实现字符拼接
+                getfullname: function () {
+                    this.result = this.firstname + '-' + this.lastname
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

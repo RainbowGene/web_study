@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../public/js/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <nav :class='active' @click.prevent=''>
+            <!--菜单上的链接被点击，我们调用makeActive方法-->
+            <a href="#" class="home" @click='makeActive("home")'>home</a>
+            <a href="#" class="projects" @click='makeActive("projects")'>projects</a>
+            <a href="#" class="services" @click='makeActive("services")'>services</a>
+            <a href="#" class="contact" @click='makeActive("contact")'>contact</a>
+        </nav>
+
+        <p>选择了 <b>{{active}}</b></p>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: '#main',
+            data: {
+                active: 'home'
+            },
+            methods: {
+                makeActive: function (item) {
+                    //模型改变，视图自动更新
+                    this.active = item
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

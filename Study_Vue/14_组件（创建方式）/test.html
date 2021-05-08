@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件案例</title>
+    <script src="../public/js/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <my-com></my-com>
+        <my-com2></my-com2>
+        <my-com3></my-com3>
+        <mycom4></mycom4>
+    </div>
+
+    <script>
+        //原始方式实现
+        //1,使用 Vue.extend 来创建全局的Vue组件
+        let com1 = Vue.extend({
+            template: '<h3>这是个Vue组件</h3>'
+        })
+        // 2.使用 Vue.component('组件的名称', 创建出来的组件模板对象)
+        Vue.component("myCom", com1);
+        /**注意组件的名称如果采用的是 驼峰命名法，那么在使用组件的时候 大写必须改为 小写
+            而且要用 “-”连接。 都是小写就没有关系了
+        */
+
+        //简写为
+        Vue.component('myCom2', Vue.extend({
+            template: '<h3>简写方式写出的组件</h3>'
+        }))
+
+        //再简写
+        Vue.component('myCom3', {
+            template: '<h3>更加简写的组件</h3>'
+            /**如果组件HTML元素有多个root标签则会报错
+                例如：  template: '<h3>更加简写的组件</h3><span></span>'
+                要用div扩起来:
+                     template: '<div><h3>更加简写的组件</h3><span></span></div>'
+            */
+        })
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+
+            },
+            components: {    //此处可以定义私有组件
+                mycom4: {
+                    template: '<h3>这是私有组件4</h3>'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

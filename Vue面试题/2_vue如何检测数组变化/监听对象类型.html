@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>监听对象类型</title>
+</head>
+
+<body>
+  name:<input id='name' />
+  val:<input id='val' />
+  list:<input id='list' />
+</body>
+<script>
+  const model = {
+    name: 'vue',
+    data: {
+      val: 1
+    },
+    list: [1]
+  };
+
+  // 监听函数
+  function observe(obj) {
+    // 遍历所有属性各自监听
+    Object.keys(obj).map(key => {
+      // 将object属性特殊处理
+      if (typeof obj[key] === 'object') { // 对象类型循环内部监听
+        observe(obj[key]);
+      }
+      else {
+        // 非对象属性的做监听
+        defineReactive(obj, key, obj[key])
+      }
+    })
+  }
+
+  // 利用Object.defineProperty做对象属性的做监听
+  function defineReactive(obj, key, val) {
+    Object.defineProperty(obj, key, {
+      get() {
+        return val;
+      },
+      set(newVal) {
+        // 当有新值设置时，执行setter
+        console.log(`${key}变化:从${val} => ${newVal}`)
+        if (Array.isArray(obj)) {
+          document.querySelector('#list').value = newVal;
+        }
+        else {
+          document.querySelector(`#${key}`).value = newVal;
+        }
+        val = newVal;
+        // 新值属性再次进行监听
+        observe(newVal);
+      }
+    })
+  }
+
+  // 属性监听
+  observe(model)
+</script>
+
+</html>

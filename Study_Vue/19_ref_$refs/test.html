@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ref和$refs</title>
+    <script src="../public/js/vue.min.js"></script>
+</head>
+
+<body>
+    <!--在Vue中一般很少直接操作DOM，但不可避免-->
+    <!--
+        1,ref: 给元素或子组件注册引用信息，引用信息将会注册在父组件$refs上，
+               如果是普通的DOM元素是上使用，引用指向的就是DOM元素，如果是在
+               子组件上，引用的就是指向子组件的实例
+        2,$refs : 是一个对象，持有已注册过 ref 的所有子组件
+    -->
+    <div id="app">
+        <input type="button" value="获取DOM" @click='getElement'>
+        <h3 id='mh3' ref='mh3'>我是标题h3</h3>
+        <hr>
+        <!--在子组件中使用ref属性，会将子组件添加到父组件的$refs对象中-->
+        <login ref='mylogin'></login>
+    </div>
+    <script>
+        let login = {
+            template: '<h3>login组件</h3>',
+            data() {
+                return {
+                    msg: 'ok'
+                }
+            },
+            methods: {
+                show() {
+                    console.log('show方法执行了')
+                }
+            }
+        }
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+                getElement() {
+                    //普通方式获取DOM
+                    //console.log(document.getElementById('mh3').innerHTML)
+
+                    //$refs方式：打印 h3
+                    console.log(this.$refs.mh3.innerHTML)
+
+                    //打印子组件消息 及 执行子组件中的方法
+                    console.log(this.$refs.mylogin.msg)
+                    this.$refs.mylogin.show()
+                }
+            },
+            components: {
+                login
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>样式处理</title>
+    <script src="../public/js/vue.min.js"></script>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .thin {
+            font-weight: 200;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .active {
+            letter-spacing: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!--css 样式的基本使用-->
+        <h1 class="red thin">vue中的样式设置1</h1>
+        <!--v-bind 使用数组形式绑定样式-->
+        <h1 v-bind:class="['red','thin']">vue中的样式设置2</h1>
+        <h1 :class="['red','thin']">vue中的样式设置3</h1>
+        <!--绑定的数组中添加三目运算符-->
+        <h1 :class="['red','thin',flag?'active':'']">vue中的样式设置4</h1>
+        <!--上面的三目运算符可以替换为对象，效果一样-->
+        <h1 :class="['red','thin',{'active':flag}]">vue中的样式设置5</h1>
+
+        <!--绑定一个vm中的对象-->
+        <h1 :class="classObj">vue中的样式设置6</h1>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                flag: true,
+                classObj: { red: true, thin: true, italic: false, active: false }
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

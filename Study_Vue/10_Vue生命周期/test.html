@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue生命周期演示</title>
+    <script src="../public/js/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="修改msg的值" @click="msg='no'">
+        <p id="myp">{{msg}}</p>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'ok'
+            },
+            methods: {
+                show: function () {
+                    console.log('show方法执行了....')
+                }
+            },
+            beforeCreate: function () { //这个方法是Vue周期中的第一个方法，data和methoss的内容还未加载
+                // console.log(this.msg)    //undefined
+                // this.show()              //此时报错
+            },
+            created: function () {  //Vue实例创建完成后被调用,且data和methods被初始完成
+                console.log(this.msg)
+                this.show()
+            },
+            beforeMount: function () {  //完成了模板的编译，但未挂载到页面
+                console.log('页面中的值(来自 beforeMount 方法):' + document.getElementById('myp').innerHTML)
+                console.log('内存中的值(来自 beforeMount 方法):' + this.msg)
+            },
+            mounted: function () { //模板编译完成并且已挂载到指定DOM容器中显示
+                console.log('页面中的值(来自 mounted 方法):' + document.getElementById('myp').innerHTML)
+                console.log('内存中的值(来自 mounted 方法):' + this.msg)
+                //*mounted 是实例创建的最后一个生命周期函数,当执行完该函数就表示实例创建完成
+                // 此时如果没有其它操作，这个实例就在我们的内存中
+            },
+            //运行中的两个方法
+            beforeUpdate: function () {
+                //状态更新之前执行此函数，此时data中的数据更新为最新，而页面为原数据
+                console.log('页面中的值(来自 beforeUpdate 方法):' + document.getElementById('myp').innerHTML)
+                console.log('内存中的值(来自 beforeUpdate 方法):' + this.msg)
+            },
+            updated: function () {
+                //状态更新之前执行此函数，此时data中的数据更新为最新，而页面为原数据
+                console.log('页面中的值(来自 updated 方法):' + document.getElementById('myp').innerHTML)
+                console.log('内存中的值(来自 updated 方法):' + this.msg)
+            },
+            beforeDestory: function () {
+                //实例销毁前执行(不好演示)
+            },
+            destoryed: function () {
+                //实例销毁后执行(不好演示)
+            }
+        })
+    </script>
+
+</body>
+
+</html>

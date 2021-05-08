@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-for</title>
+    <script src="../public/js/vue.min.js"></script>
+</head>
+
+<body>
+    <div id='app'>
+        <!-- 
+        简单的插值使用：    
+        <p>{{list[0]}}</p>
+        <p>{{list[1]}}</p>
+        <p>{{list[2]}}</p>
+        <p>{{list[3]}}</p>
+        <p>{{list[4]}}</p> -->
+
+        <!--使用 v-for-->
+        <p v-for='item in arr'>{{item}}</p>
+
+        <!--获取循环下标-->
+        <p v-for='(item,i) in arr'>索引值：{{i}} --- 每项：{{item}}</p>
+
+        <!--集合中的元素是对象-->
+        <p v-for='(user,i) in list'>学号:{{user.id}} --- 姓名:{{user.name}}</p>
+
+        <!--遍历对象:-->
+        <p v-for='(val,key,i) in user'>键：{{key}} --- 值：{{val}} --- 索引:{{i}}</p>
+
+        <!--迭代数字-->
+        <p v-for='i in 10'>这是第{{ i }}次循环</p>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                arr: ['嘿嘿', '呵呵', '嘻嘻', '哈哈'],
+
+                list: [
+                    { id: 1, name: 'Gene' },
+                    { id: 2, name: 'Kanenan' },
+                    { id: 3, name: 'Alice' },
+                    { id: 4, name: 'Alan' },
+                    { id: 5, name: 'Bob' }
+                ],
+
+                //注意：在遍历对象中的键（key）值（val）对时，还有第三个位置：索引（i）
+                user: {
+                    id: 1,
+                    name: 'Gene',
+                    gender: '男'
+                }
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+<!--针对数据为数组的类型，循环-->
+
+</html>

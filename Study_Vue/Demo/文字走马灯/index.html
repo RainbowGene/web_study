@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>文字走马灯</title>
+    <script src="../../public/js/vue.min.js"></script>
+</head>
+<!--实现过程：
+            1，绑定事件
+            2，动态截取加定时
+            3，取消定时-->
+            
+<body>
+    <div id="app">
+        <input type="button" value="加油" @click="lang">
+        <input type="button" value="低调" @click="stop">
+
+        <h4>{{msg}}</h4>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '斯人若彩虹，遇上方知有. - Gene',
+                intervalId: null     //定义定时器
+            },
+            methods: {
+                lang() {
+                    //截取到头的第一个字符
+                    //this
+                    if (this.intervalId != null) return;
+                    this.intervalId = setInterval(() => {
+                        let start = this.msg.substring(0, 1)
+                        //获取到后面的所有字符
+                        let end = this.msg.substring(1)
+                        //重新拼接得到新的字符串,并赋值给 this.msg
+                        this.msg = end + start
+                    }, 400)
+                },
+                // 注意： VM实例，会监听自己身上 data 中所有数据的改变，只要数据一发生变化，
+                //就会自动把 最新的数据，从data 上同步到页面中去；
+                //【好处：只需要关心数据，不需要考虑如何重新渲染DOM页面】
+                stop() {
+                    //停止定时器
+                    clearInterval(this.intervalId)
+                    //清除定时器后，重置定时器id
+                    this.intervalId = null
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

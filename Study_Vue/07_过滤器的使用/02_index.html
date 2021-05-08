@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>传参数的过滤器</title>
+    <script src="../public/js/vue.min.js"></script>
+</head>
+
+<body>
+    <!--
+         在通过管道符号来使用过滤器的时候我们还可以传递参数过去
+    -->
+
+    <div id="app">
+        <p>{{msg}}</p>
+        <p>{{msg | msgformat('abcd')}}</p>
+    </div>
+
+    <script>
+        //创建一个过滤器将 NBA 替换为 美国篮球联赛
+        Vue.filter('msgformat', function (msg) {    //msg为原字段
+            return msg.replace(/NBA/g, '美国篮球联盟')  //正则表达式
+        })
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "今日NBA,保罗换威少,哈哈...NBA新闻真多，大家一起关注NBA..."
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

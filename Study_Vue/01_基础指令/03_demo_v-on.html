@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-on</title>
+    <script src="../public/js/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="点击1">
+        <input type="button" value="点击2" v-on:click='show'>
+        <input type="button" value="点击3" @click='show'>
+        <!-- v-on 可以用 @ 代替 -->
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+                show: function () {
+                    alert('hello world!')
+                }
+            }
+        })    
+    </script>
+</body>
+
+</html>

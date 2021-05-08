@@ -1,0 +1,26 @@
+
+
+使用 Vue-cli 构建开发环境
+    刚开始的时候，我们经常会纠结于如何设置目录结构，特别是在多人开发构建大型项目的时候，
+    如果目录没有一个清晰的描述和规划往往会导致项目的混乱和冲突。Vue.js 提供了一个官方的
+    命令行工具 Vue-cli，能帮助我们快速构建单页应用结构，并提供许多方便开发的功能：
+
+    ·热重载，无需手动刷新页面即可看到修改效果。
+    ·预处理器，可以使用 ES6 或 SASS/LESS 等不能直接在浏览器中使用的语言开发，将其编译成可执行的 JS 或 CSS。
+    ·支持与 eslint 代码风格检查，能保证团队代码风格一致。
+    ·打包发布，将业务代码合并压缩成单个 CSS 和 JS 文件，减少 HTTP 请求。
+    ·代理请求，方便前后端分离的项目，本地可直接请求其他远程服务器上的后端接口服务。
+
+1,安装
+    通过命令行安装 vue-clic：
+    npm install -g vue-cli
+    vue-cli 支持以下 6 种模式的脚手架：
+
+    ·Webpack：使用 Webpack 作为构建工具，而且包含了热更新、代码检查、测试等配套工具的安装。
+    ·webpack-simple：简化的 Webpack 版，仅包含了 vue-loader。
+    ·browserify：与 Webpack 型脚手架功能类似，但用 browserify 替换掉 Webpack。
+    ·browserify-simple：同 webpack-simple。
+    ·pwa：pwa（progressive web app）渐进式网页应用模板，基于 Webpack 构建。
+    ·simple：最简单的模板，一个 HTML 引用了 Vue.js。
+    
+2,
